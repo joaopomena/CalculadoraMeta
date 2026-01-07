@@ -10,6 +10,8 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
     </style>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
@@ -18,76 +20,98 @@
         
         <div class="text-center mb-8">
             <div class="bg-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
-                <i data-lucide="trending-up" class="text-white w-8 h-8"></i>
+                <i data-lucide="calculator" class="text-white w-8 h-8"></i>
             </div>
-            <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Calculadora Meta Ads</h1>
-            <p class="text-slate-500 text-sm mt-2 font-medium">Atualizado: Janeiro de 2026</p>
+            <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Meta Ads Tax Calc</h1>
+            <p class="text-slate-500 text-sm mt-2 font-medium">Projeção de Impostos 2026</p>
         </div>
 
         <div class="space-y-6">
             <div>
-                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Valor do Orçamento</label>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1 text-center">Quanto você quer investir?</label>
                 <div class="relative group">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-lg transition-colors group-focus-within:text-blue-500">R$</span>
+                    <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-lg transition-colors group-focus-within:text-blue-500">R$</span>
                     <input type="number" id="inputValor" placeholder="0,00" 
-                        class="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-bold text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none transition-all shadow-sm"
+                        class="w-full pl-14 pr-4 py-5 bg-slate-50 border-2 border-slate-100 rounded-3xl text-2xl font-bold text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none transition-all shadow-sm"
                         oninput="calcular()">
                 </div>
             </div>
 
-            <div class="bg-slate-900 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
+            <div class="bg-slate-900 rounded-[2.5rem] p-7 text-white shadow-xl relative overflow-hidden">
                 <div class="relative z-10">
                     <div class="flex justify-between items-center mb-4">
-                        <span class="text-slate-400 text-sm">Impostos (12.5%)</span>
-                        <span class="font-bold text-red-400" id="resJuros">+ R$ 0,00</span>
+                        <span class="text-slate-400 text-sm font-medium">Impostos (12.5%)</span>
+                        <span class="font-bold text-rose-400" id="resJuros">+ R$ 0,00</span>
                     </div>
-                    <div class="border-t border-slate-700 my-4 opacity-50"></div>
+                    <div class="border-t border-slate-700/50 my-5"></div>
                     <div class="flex justify-between items-end">
                         <div>
-                            <span class="text-slate-400 text-xs block mb-1 uppercase">Total a Pagar</span>
-                            <span class="text-3xl font-extrabold text-blue-400" id="resTotal">R$ 0,00</span>
+                            <span class="text-slate-400 text-xs block mb-1 uppercase tracking-wider">Total Final na Fatura</span>
+                            <span class="text-4xl font-extrabold text-blue-400 leading-none" id="resTotal">R$ 0,00</span>
                         </div>
-                        <button onclick="copiarValor()" class="bg-blue-600 hover:bg-blue-500 p-3 rounded-xl transition-all active:scale-90 group">
-                            <i data-lucide="copy" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                        <button onclick="copiarValor()" class="bg-blue-600 hover:bg-blue-500 p-3.5 rounded-2xl transition-all active:scale-90 group shadow-lg shadow-blue-900/20">
+                            <i data-lucide="copy" class="w-6 h-6 group-hover:rotate-12 transition-transform"></i>
                         </button>
                     </div>
                 </div>
-                <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-500 opacity-10 rounded-full blur-2xl"></div>
+                <div class="absolute -right-6 -top-6 w-32 h-32 bg-blue-500 opacity-10 rounded-full blur-3xl"></div>
             </div>
 
-            <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex gap-3">
-                <i data-lucide="info" class="text-amber-500 w-8 h-8 shrink-0"></i>
-                <p class="text-[11px] text-amber-800 leading-relaxed italic">
-                    <strong>Nota Fiscal Meta:</strong> Em 2026, o repasse de PIS/COFINS (9,25%) e ISS (~3%) é automático sobre o valor bruto. Esta calculadora projeta o custo real final para sua gestão financeira.
+            <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4 flex gap-3">
+                <i data-lucide="info" class="text-blue-500 w-5 h-5 shrink-0 mt-0.5"></i>
+                <p class="text-[11px] text-blue-800 leading-relaxed italic">
+                    A Meta atualizou o repasse tributário em 2026. Este cálculo considera a média de **PIS/COFINS (9,25%) + ISS (2% a 5%)** incidindo sobre o valor investido.
                 </p>
             </div>
         </div>
 
-        <p class="text-center text-[10px] text-slate-400 mt-8 uppercase tracking-tighter">
-            Desenvolvido para Gestores de Tráfego • 2026
-        </p>
+        <div class="mt-10 pt-6 border-t border-slate-100 text-center">
+            <p class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-2">Desenvolvido por</p>
+            <a href="https://instagram.com/joaopomena" target="_blank" 
+               class="inline-flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-full shadow-sm hover:shadow-md hover:border-blue-300 transition-all group">
+                <span class="bg-gradient-to-tr from-yellow-400 via-rose-500 to-purple-600 w-6 h-6 rounded-md flex items-center justify-center">
+                    <i data-lucide="instagram" class="text-white w-4 h-4"></i>
+                </span>
+                <span class="text-slate-700 font-bold text-sm group-hover:text-blue-600 transition-colors">@joaopomena</span>
+            </a>
+        </div>
     </div>
 
     <script>
-        // Iniciar ícones
+        // Inicializar os ícones do Lucide
         lucide.createIcons();
 
         function calcular() {
             const input = document.getElementById('inputValor');
             const valorOriginal = parseFloat(input.value) || 0;
-            const taxa = 12.5 / 100;
+            const taxa = 0.125; // 12.5%
             
             const valorJuros = valorOriginal * taxa;
             const valorTotal = valorOriginal + valorJuros;
 
-            document.getElementById('resJuros').innerText = "+ " + valorJuros.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-            document.getElementById('resTotal').innerText = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            // Formatação para Real Brasileiro
+            const formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+
+            document.getElementById('resJuros').innerText = "+ " + formatter.format(valorJuros);
+            document.getElementById('resTotal').innerText = formatter.format(valorTotal);
         }
 
         function copiarValor() {
             const valorTotal = document.getElementById('resTotal').innerText;
+            if (valorTotal === "R$ 0,00") return;
+
             navigator.clipboard.writeText(valorTotal).then(() => {
-                alert('🚀 Valor Total Copiado!');
+                // Feedback visual simples
+                const btn = document.querySelector('button');
+                const originalColor = btn.className;
+                btn.classList.add('bg-green-500');
+                alert('🚀 Valor total copiado: ' + valorTotal);
+                setTimeout(() => {
+                    btn.className = originalColor;
+                }, 1000);
             });
         }
     </script>
