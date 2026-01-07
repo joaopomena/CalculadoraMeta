@@ -1,47 +1,95 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Calculadora Meta Ads</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Meta Ads | Taxa 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+    </style>
 </head>
-<body>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex items-center justify-center p-4">
 
-<div class="card">
-  <h1>Calculadora Meta Ads</h1>
-  <span class="badge">Taxa fixa 12,5%</span>
+    <div class="glass w-full max-w-md rounded-[2.5rem] shadow-2xl border border-white p-8 md:p-10 transition-all">
+        
+        <div class="text-center mb-8">
+            <div class="bg-blue-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-blue-200">
+                <i data-lucide="trending-up" class="text-white w-8 h-8"></i>
+            </div>
+            <h1 class="text-2xl font-extrabold text-slate-800 tracking-tight">Calculadora Meta Ads</h1>
+            <p class="text-slate-500 text-sm mt-2 font-medium">Atualizado: Janeiro de 2026</p>
+        </div>
 
-  <label>Valor do orçamento</label>
-  <input
-    type="number"
-    id="valor"
-    placeholder="Ex: 1000"
-    oninput="calcular()"
-  >
+        <div class="space-y-6">
+            <div>
+                <label class="block text-xs font-bold text-slate-400 uppercase tracking-widest mb-2 ml-1">Valor do Orçamento</label>
+                <div class="relative group">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-semibold text-lg transition-colors group-focus-within:text-blue-500">R$</span>
+                    <input type="number" id="inputValor" placeholder="0,00" 
+                        class="w-full pl-12 pr-4 py-4 bg-slate-50 border-2 border-slate-100 rounded-2xl text-xl font-bold text-slate-700 focus:border-blue-500 focus:bg-white focus:outline-none transition-all shadow-sm"
+                        oninput="calcular()">
+                </div>
+            </div>
 
-  <div class="linha">
-    <span>Valor base</span>
-    <span id="valorBase">R$ 0,00</span>
-  </div>
+            <div class="bg-slate-900 rounded-[2rem] p-6 text-white shadow-xl relative overflow-hidden">
+                <div class="relative z-10">
+                    <div class="flex justify-between items-center mb-4">
+                        <span class="text-slate-400 text-sm">Impostos (12.5%)</span>
+                        <span class="font-bold text-red-400" id="resJuros">+ R$ 0,00</span>
+                    </div>
+                    <div class="border-t border-slate-700 my-4 opacity-50"></div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <span class="text-slate-400 text-xs block mb-1 uppercase">Total a Pagar</span>
+                            <span class="text-3xl font-extrabold text-blue-400" id="resTotal">R$ 0,00</span>
+                        </div>
+                        <button onclick="copiarValor()" class="bg-blue-600 hover:bg-blue-500 p-3 rounded-xl transition-all active:scale-90 group">
+                            <i data-lucide="copy" class="w-5 h-5 group-hover:rotate-12 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="absolute -right-4 -top-4 w-24 h-24 bg-blue-500 opacity-10 rounded-full blur-2xl"></div>
+            </div>
 
-  <div class="linha">
-    <span>Taxa Meta (12,5%)</span>
-    <span id="valorJuros">R$ 0,00</span>
-  </div>
+            <div class="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex gap-3">
+                <i data-lucide="info" class="text-amber-500 w-8 h-8 shrink-0"></i>
+                <p class="text-[11px] text-amber-800 leading-relaxed italic">
+                    <strong>Nota Fiscal Meta:</strong> Em 2026, o repasse de PIS/COFINS (9,25%) e ISS (~3%) é automático sobre o valor bruto. Esta calculadora projeta o custo real final para sua gestão financeira.
+                </p>
+            </div>
+        </div>
 
-  <div class="linha total">
-    <span>Total a pagar</span>
-    <span id="valorFinal">R$ 0,00</span>
-  </div>
+        <p class="text-center text-[10px] text-slate-400 mt-8 uppercase tracking-tighter">
+            Desenvolvido para Gestores de Tráfego • 2026
+        </p>
+    </div>
 
-  <button onclick="copiarValor()">Copiar valor total</button>
+    <script>
+        // Iniciar ícones
+        lucide.createIcons();
 
-  <p class="obs">
-    A Meta Ads aplica uma taxa fixa de 12,5% referente a impostos cobrados na fatura.
-  </p>
-</div>
+        function calcular() {
+            const input = document.getElementById('inputValor');
+            const valorOriginal = parseFloat(input.value) || 0;
+            const taxa = 12.5 / 100;
+            
+            const valorJuros = valorOriginal * taxa;
+            const valorTotal = valorOriginal + valorJuros;
 
-<script src="script.js"></script>
+            document.getElementById('resJuros').innerText = "+ " + valorJuros.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            document.getElementById('resTotal').innerText = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function copiarValor() {
+            const valorTotal = document.getElementById('resTotal').innerText;
+            navigator.clipboard.writeText(valorTotal).then(() => {
+                alert('🚀 Valor Total Copiado!');
+            });
+        }
+    </script>
 </body>
 </html>
