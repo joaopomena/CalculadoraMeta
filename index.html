@@ -2,25 +2,39 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Calculadora de Juros Meta</title>
+  <title>Calculadora de Juros Meta Ads</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="box">
-    <h2>Calculadora de Juros</h2>
-    <p>Taxa aplicada: <strong>12,5%</strong></p>
+<div class="container">
+  <h1>Calculadora 🚀 Meta Ads</h1>
 
-    <input 
-      type="number" 
-      id="valor" 
-      placeholder="Digite o valor"
-      oninput="calcular()"
-    >
+  <p class="info">
+    Aqui você calcula quanto o seu orçamento de anúncios fica com o acréscimo de ~12,5% (impostos cobrados pela Meta Ads) na fatura 📊. :contentReference[oaicite:3]{index=3}
+  </p>
 
-    <p class="resultado" id="resultado">Valor com juros: R$ 0,00</p>
+  <input
+    type="number"
+    id="valor"
+    placeholder="Digite o valor do orçamento"
+    oninput="calcular()"
+  />
+
+  <div class="results">
+    <p id="valorBase">Valor base: R$ 0,00</p>
+    <p id="valorJuros">Juros/Impostos (12,5%): R$ 0,00</p>
+    <p id="valorFinal">Valor total: R$ 0,00</p>
   </div>
 
-  <script src="script.js"></script>
+  <button onclick="copiarValor()">📋 Copiar valor total</button>
+
+  <p class="footer">
+    Taxa de ~12,5% representa os impostos que agora são repassados na cobrança de anúncios no Brasil (inclui PIS/COFINS e ISS). :contentReference[oaicite:4]{index=4}
+  </p>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
