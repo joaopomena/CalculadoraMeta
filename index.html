@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Juros Meta</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="box">
+    <h2>Calculadora de Juros</h2>
+    <p>Taxa aplicada: <strong>12,5%</strong></p>
+
+    <input 
+      type="number" 
+      id="valor" 
+      placeholder="Digite o valor"
+      oninput="calcular()"
+    >
+
+    <p class="resultado" id="resultado">Valor com juros: R$ 0,00</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
