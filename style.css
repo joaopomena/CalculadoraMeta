@@ -1,52 +1,29 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+function calcular() {
+  const valor = Number(document.getElementById("valor").value);
+  const taxa = 0.125;
+
+  if (valor <= 0 || isNaN(valor)) {
+    document.getElementById("valorBase").innerText = "R$ 0,00";
+    document.getElementById("valorJuros").innerText = "R$ 0,00";
+    document.getElementById("valorFinal").innerText = "R$ 0,00";
+    return;
+  }
+
+  const juros = valor * taxa;
+  const total = valor + juros;
+
+  document.getElementById("valorBase").innerText =
+    `R$ ${valor.toFixed(2).replace(".", ",")}`;
+
+  document.getElementById("valorJuros").innerText =
+    `R$ ${juros.toFixed(2).replace(".", ",")}`;
+
+  document.getElementById("valorFinal").innerText =
+    `R$ ${total.toFixed(2).replace(".", ",")}`;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: #f7f7f7;
-  padding: 15px;
-}
-
-.container {
-  background: #ffffff;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  margin: auto;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-h1 {
-  font-size: 1.8rem;
-  margin-bottom: 10px;
-}
-
-.info, .footer {
-  font-size: 0.9rem;
-  margin: 10px 0;
-  color: #555;
-}
-
-input {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  font-size: 1rem;
-}
-
-.results p {
-  font-size: 1rem;
-  margin: 6px 0;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  font-size: 1rem;
-  cursor: pointer;
+function copiarValor() {
+  const texto = document.getElementById("valorFinal").innerText;
+  navigator.clipboard.writeText(texto);
+  alert("Valor total copiado!");
 }
